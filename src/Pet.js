@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "@reach/router";
+
 const Pet = ({ name, animal, breed, media, location, id }) => {
   const hero = media.photos.photo[0].value;
   return (
-    <a href={`/details/${id}`} className="pet">
+    <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
         <img src={hero} alt={name} />
       </div>
@@ -12,7 +14,7 @@ const Pet = ({ name, animal, breed, media, location, id }) => {
           {animal} - {breed} - {location}
         </h2>
       </div>
-    </a>
+    </Link>
   );
 };
 

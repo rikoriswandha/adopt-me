@@ -6,12 +6,9 @@ class Carousel extends Component {
     active: 0
   };
   static getDerivedStateFromProps({ media }) {
-    let photos = [
-      "http://placecorgi.com/600/600",
-      "http://placecorgi.com/500/500"
-    ];
-    if (media.length) {
-      photos = media.map(({ large }) => large);
+    let photos = [];
+    if (media && media.photos && media.photos.photo) {
+      photos = media.photos.photo.filter(photo => photo["@size"] === "pn");
     }
 
     return { photos };
@@ -26,13 +23,13 @@ class Carousel extends Component {
 
     return (
       <div className="carousel">
-        <img src={photos[active]} alt="animal" />
+        <img src={photos[active].value} alt="animal" />
         <div className="carousel-smaller">
           {photos.map((photo, index) => (
             // eslint-disable-next-line
             <img
-              src={photo}
-              key={photo}
+              src={photo.value}
+              key={photo.value}
               className={index === active ? "active" : ""}
               alt="animal thumbnail"
               onClick={this.handleIndexClick}
